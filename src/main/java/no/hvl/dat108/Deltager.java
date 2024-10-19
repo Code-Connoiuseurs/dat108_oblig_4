@@ -1,14 +1,31 @@
 package no.hvl.dat108;
-
-import 
+import jakarta.validation.constraints.*;
 
 public class Deltager {
-    private String mobil;
+	public enum Kjonn {
+		Mann,
+		Kvinne
+	}
+	
+    @NotNull(message = "Mobil kan ikke være tomt") @Pattern(regexp="(^$|[0-9]{8})", message = "Mobil må være eksakt 8 siffer")
+	private String mobil;
+    @NotNull(message = "Passord kan ikke være tomt") @Size(min = 5, message = "Passord må være lengre enn 5")
     private String passord;
+    @NotNull(message = "Fornavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Fornavn må være mellom 2-20")
     private String fornavn;
+    @NotNull(message = "Etternavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Etternavn må være mellom 2-20")
     private String etternavn;
-    private String kjonn;
+    @NotNull(message = "Kjønn kan ikke være tomt")
+    private Kjonn kjonn;
     
+	public Kjonn getKjonn() {
+		return kjonn;
+	}
+
+	public void setKjonn(Kjonn kjonn) {
+		this.kjonn = kjonn;
+	}
+
 	public String getMobil() {
 		return mobil;
 	}
@@ -25,7 +42,7 @@ public class Deltager {
 		this.passord = passord;
 	}
 
-	@Size
+
 	public String getFornavn() {
 		return fornavn;
 	}
@@ -42,21 +59,13 @@ public class Deltager {
 		this.etternavn = etternavn;
 	}
 
-	public String getKjonn() {
-		return kjonn;
-	}
-
-	public void setKjonn(String kjonn) {
-		this.kjonn = kjonn;
-	}
-
 	@Override
 	public String toString() {
 		return "Deltager [mobil=" + mobil + ", passord=" + passord + ", fornavn=" + fornavn + ", etternavn=" + etternavn
 				+ ", kjonn=" + kjonn + "]";
 	}
 
-	public Deltager(String mobil, String passord, String fornavn, String etternavn, String kjonn) {
+	public Deltager(String mobil, String passord, String fornavn, String etternavn, Kjonn kjonn) {
 		this.mobil = mobil;
 		this.passord = passord;
 		this.fornavn = fornavn;
