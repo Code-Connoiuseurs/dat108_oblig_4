@@ -15,7 +15,7 @@
   </head>
   <body>
 	<h1>Påmeldingsbekreftelse</h1>
-	<p>Påmeldingen er mottatt for:</p>
+	<p>Påmeldingen er mottatt for deltager:</p>
 	<ul>
 		<li>${deltager.fornavn}</li>
 		<li>${deltager.etternavn}</li>

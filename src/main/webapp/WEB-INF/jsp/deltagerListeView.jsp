@@ -15,8 +15,25 @@
   </head>
   <body>
 	<h1>Deltagerliste</h1>
-	<c:forEach var="e" items="${deltagere}">
-		<li>${e}</li>
-	</c:forEach>
+	
+	<table>
+		<tr>
+			<th>Kjønn</th>
+			<th>Navn</th>
+			<th>Mobil</th>
+		</tr>
+		<tr>
+			<c:forEach var="deltager" items="${deltagere}">
+				<tr>
+					<td>${deltager.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
+					<td>${deltager.fornavn} ${deltager.etternavn}</td>
+					<td>${deltager.mobil}</td>
+				</tr>
+			</c:forEach>
+		</tr>
+	</table>
+	
+	<a href="/paamelding">Tilbake til påmelding</a>
+	
   </body>
 </html>
