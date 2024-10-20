@@ -7,9 +7,9 @@ public class Deltager {
 	private String mobil;
     @NotNull(message = "Passord kan ikke være tomt") @Size(min = 5, message = "Passord må være lengre enn 5")
     private String passord;
-    @NotNull(message = "Fornavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Fornavn må være mellom 2-20") @Pattern(regexp = "^[a-zæøåA-ZÆØÅ\\ \\-]{2,20}$")
+    @NotNull(message = "Fornavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Fornavn må være mellom 2-20") @Pattern(regexp = "^[a-zæøåA-ZÆØÅ -]{2,20}$")
     private String fornavn;
-    @NotNull(message = "Etternavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Etternavn må være mellom 2-20") @Pattern(regexp = "^[a-zæøåA-ZÆØÅ\\ \\-]{2,20}$")
+    @NotNull(message = "Etternavn kan ikke være tomt") @Size(min = 2, max = 20, message = "Etternavn må være mellom 2-20") @Pattern(regexp = "^[a-zæøåA-ZÆØÅ -]{2,20}$")
     private String etternavn;
     // Regex: Streng med verdi enten "Mann" eller "Kvinne"
     @NotNull(message = "Kjønn kan ikke være tomt") @Pattern(regexp = "^mann$|^kvinne$", message = "Kjønn må være Mann eller Kvinne")

@@ -12,6 +12,7 @@
   <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="simple.css">
+  	<title>Deltagerliste</title>
   </head>
   <body>
 	<h1>Deltagerliste</h1>
@@ -22,15 +23,13 @@
 			<th>Navn</th>
 			<th>Mobil</th>
 		</tr>
-		<tr>
-			<c:forEach var="deltager" items="${deltagere}">
-				<tr>
-					<td>${deltager.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
-					<td>${deltager.fornavn} ${deltager.etternavn}</td>
-					<td>${deltager.mobil}</td>
-				</tr>
-			</c:forEach>
-		</tr>
+		<c:forEach var="deltager" items="${deltagere}">
+			<tr>
+				<td>${deltager.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
+				<td>${deltager.fornavn} ${deltager.etternavn}</td>
+				<td>${deltager.mobil}</td>
+			</tr>
+		</c:forEach>
 	</table>
 	
 	<a href="/paamelding">Tilbake til påmelding</a>

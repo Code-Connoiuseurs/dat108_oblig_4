@@ -12,6 +12,7 @@
   <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="simple.css">
+	  <title></title>
   </head>
   <body>
 	<h1>Påmelding</h1>
@@ -25,19 +26,19 @@
 		</c:if>
 		<fieldset>
 			<label for="fornavn">Fornavn</label>
-			<input type="text" name="fornavn" minlength="2" maxlength="20" pattern="^[a-zæøåA-ZÆØÅ \-]{2,20}$" required>
-			
+			<input type="text" id="fornavn" name="fornavn" minlength="2" maxlength="20" pattern="^[a-zæøåA-ZÆØÅ \-]{2,20}$" required>
+
 			<label for="etternavn">Etternavn</label>
-			<input type="text" name="etternavn" minlength="2" maxlength="20" pattern="^[a-zæøåA-ZÆØÅ \-]{2,20}$" required>
+			<input type="text" id="etternavn" name="etternavn" minlength="2" maxlength="20" pattern="^[a-zæøåA-ZÆØÅ \-]{2,20}$" required>
 			
 			<label for="mobile">Mobil (8 siffer)</label>
-			<input type="tel" name="mobil" inputmode="numeric" minlength="8" maxlength="8" pattern="^[0-9]{8}$" required>
+			<input type="tel" id="mobile" name="mobil" inputmode="numeric" minlength="8" maxlength="8" pattern="^[0-9]{8}$" required>
 			
 			<label for="passord">Passord</label>
-			<input type="password" name="passord" minlength="5" required>
+			<input type="password" id="passord" name="passord" minlength="5" required>
 			
-			<label for="passord-re">Passord repetert</label>
-			<input type="password" name="passord_re" minlength="5" required>
+			<label for="passord_re">Passord repetert</label>
+			<input type="password" id="passord_re" name="passord_re" minlength="5" required>
 			
 			<label>Kjønn</label>
 			<label for="mann">
