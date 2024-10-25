@@ -12,13 +12,14 @@
   <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="simple.css">
-	  <title></title>
-  </head>
+	  <title>Påmelding</title>
+  </head>	
   <body>
 	<h1>Påmelding</h1>
 	<form method="POST" action="/paamelding">
 		<c:if test="${errors.size() > 0}">
-			<ul>
+			<p style="color:red;">Feil:</p>
+			<ul style="color:red;">
 				<c:forEach var="e" items="${errors}">
 					<li>${e}</li>
 				</c:forEach>			

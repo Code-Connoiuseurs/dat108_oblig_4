@@ -10,7 +10,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
@@ -25,12 +24,12 @@ public class PaameldingController {
 	}
 	
 	@GetMapping("/paamelding")
-	public String getPaamelding(Model model) {
+	public String getPaamelding() {
 		return "paameldingView";
 	}
 	
 	@PostMapping("/paamelding")
-	public String postPaamelding(Model model, @Valid @ModelAttribute("deltager") Deltager deltager, @RequestParam(required = true, name = "passord_re") String passord_re, BindingResult bindRes, RedirectAttributes redirectAttributes) {
+	public String postPaamelding(@Valid @ModelAttribute("deltager") Deltager deltager, String passord_re, BindingResult bindRes, RedirectAttributes redirectAttributes) {
 
 		if (regDeltagere.stream().anyMatch(d -> d.getMobil().equals(deltager.getMobil()))) {
 			bindRes.addError(new FieldError("Deltager", "mobil", "Mobilnummer allerede registrert"));			
@@ -43,8 +42,8 @@ public class PaameldingController {
 			List<String> errors = bindRes.getAllErrors().stream()
 					.map(e -> e.getDefaultMessage())
 					.toList();
-			model.addAttribute("errors", errors);
-			return "paameldingView";
+			redirectAttributes.addFlashAttribute("errors", errors);
+			return "redirect:/paamelding";
 		}
 		
 		// All validering er OK, vi registrerer deltageren og redirecter til kvittering
@@ -54,7 +53,7 @@ public class PaameldingController {
 	}
 	
 	@GetMapping("/paameldt")
-	public String getPaameldt( Model model) {
+	public String getPaameldt() {
 		return "paameldtView";
 	}
 	
