@@ -8,18 +8,25 @@ public class Deltager {
 	private String mobil;
 
     @NotEmpty(message = "Passord kan ikke være tomt")
-	@Size(min = 5, message = "Passord må være lengre enn 5")
+	@Size(min = 8, message = "Passord må være minst 8 tegn")
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*[\\W_])(?!.*\\s).{8,}$",
+			message = "Passord må være minst 8 tegn langt og inneholde minst ett tall, " +
+					  "minst én liten bokstav, minst én stor bokstav og minst ett spesialtegn. " +
+					  "Mellomrom ikke tillatt.")
     private String passord;
 
     @NotEmpty(message = "Fornavn kan ikke være tomt")
-	@Size(min = 2, max = 20, message = "Fornavn må være mellom 2-20")
-	@Pattern(regexp = "^[a-zæøåA-ZÆØÅ -]{2,20}$")
+	@Size(min = 2, max = 20, message = "Fornavn må være mellom 2-20 bokstaver")
+	@Pattern(regexp = "^[A-ZÆØÅ][a-zæøåA-ZÆØÅ -]{1,19}$",
+			message = "Fornavn må starte med stor forbokstav" +
+					  "og kan inneholde mellomrom og bindestrek (-)")
     private String fornavn;
 
-	// Regex: Streng med enten 'mann' ekker 'kvinne'
     @NotEmpty(message = "Etternavn kan ikke være tomt")
-	@Size(min = 2, max = 20, message = "Etternavn må være mellom 2-20")
-	@Pattern(regexp = "^[a-zæøåA-ZÆØÅ -]{2,20}$")
+	@Size(min = 2, max = 20, message = "Etternavn må være mellom 2-20 bokstaver")
+	@Pattern(regexp = "^[A-ZÆØÅ][a-zæøåA-ZÆØÅ -]{1,19}$",
+			message = "Etternavn må starte med stor forbokstav" +
+					"og kan inneholde mellomrom og bindestrek (-)")
     private String etternavn;
 
     // Regex: Streng med verdi enten "Mann" eller "Kvinne"
