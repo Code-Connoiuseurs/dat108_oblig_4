@@ -46,31 +46,31 @@ class AppMainTests {
 		testRequestParams.set("mobil", "87654321");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeCount(1));
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 		// Tomt mobilnummer
 		testRequestParams.set("mobil", "");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// For kort mobilnummer
 		testRequestParams.set("mobil", "123");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Bokstaver i mobilnummer
 		testRequestParams.set("mobil", "abcdefgh");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Mobilnummer er ikke unikt
 		testRequestParams.set("mobil", "87654321");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
 	@Test
@@ -80,35 +80,35 @@ class AppMainTests {
 		testRequestParams.set("passord_re", "Test123!");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeCount(1));
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 		// Tomt passord
 		testRequestParams.set("passord", "");
 		testRequestParams.set("passord_re", "");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// For kort passord
 		testRequestParams.set("passord", "Test1!");
 		testRequestParams.set("passord_re", "Test1!");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Ugyldig passord
 		testRequestParams.set("passord", "langtmenikkesikkertpassord");
 		testRequestParams.set("passord_re", "langtmenikkesikkertpassord");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Ulike passord
 		testRequestParams.set("passord", "Jeg_er_normal1!");
 		testRequestParams.set("passord_re", "Jeg_er_unik1!");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
 	@Test
@@ -119,28 +119,28 @@ class AppMainTests {
 		testRequestParams.set("etternavn", "Navnesen");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeCount(1));
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 		// Tomt navn
 		testRequestParams.set("fornavn", "");
 		testRequestParams.set("etternavn", "");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// For kort navn
 		testRequestParams.set("fornavn", "Å");
 		testRequestParams.set("etternavn", "Å");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Ugyldig navn
 		testRequestParams.set("fornavn", "123_../'¨|");
 		testRequestParams.set("etternavn", "123_../'¨|");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
 	@Test
@@ -150,26 +150,26 @@ class AppMainTests {
 		testRequestParams.set("kjonn", "kvinne");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeCount(1));
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 		// Gyldig kjønn
 		testRequestParams.set("mobil", "68274612");
 		testRequestParams.set("kjonn", "mann");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeCount(1));
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 		// Tomt kjønn
 		testRequestParams.set("kjonn", "");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 
 		// Ugyldig kjønn
 		testRequestParams.set("kjonn", "");
 		mockMvc.perform(post("/paamelding")
 				.params(testRequestParams))
-				.andExpect(MockMvcResultMatchers.flash().attributeExists("errors"));
+				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
 }

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,9 +42,11 @@ public class PaameldingController {
 	
 	@PostMapping("/paamelding")
 	public String postPaamelding(
+		Model model,
 		@Valid @ModelAttribute("deltager") Deltager deltager, BindingResult bindRes,
 		@RequestParam(required = true, name = "passord_re") String passord_re,
-		RedirectAttributes redirectAttributes
+		RedirectAttributes redirectAttributes,
+		HttpServletResponse response
 	) {
 		if (regDeltagere.stream().anyMatch(d -> d.getMobil().equals(deltager.getMobil()))) {
 			bindRes.addError(new FieldError("Deltager", "mobil", "Mobilnummer allerede registrert"));			
@@ -57,9 +59,9 @@ public class PaameldingController {
 			List<String> errors = bindRes.getAllErrors().stream()
 					.map(e -> e.getDefaultMessage())
 					.toList();
-			redirectAttributes.addFlashAttribute("errors", errors);
-			redirectAttributes.addFlashAttribute("deltager", deltager);
-			return "redirect:/paamelding";
+			model.addAttribute("errors", errors);
+			response.setStatus(400);
+			return "paameldingView";
 		}
 		
 		// All validering er OK, vi registrerer deltageren og redirecter til kvittering
