@@ -217,4 +217,19 @@ class AppMainTests {
 	mockMvc.perform(post("/login").params(loginParams))
 	.andExpect(status().is4xxClientError());
 	}
+
+	@Test
+	void testLoginSuksess() throws Exception {
+		testRequestParams.set("mobil", "12345678");
+		mockMvc.perform(post("/paamelding").params(testRequestParams))
+		.andExpect(status().is3xxRedirection());
+
+	LinkedMultiValueMap<String, String> loginParams = new LinkedMultiValueMap<>();
+	loginParams.add("mobil", "12345678");
+	loginParams.add("passord", "Tester123!");
+
+	mockMvc.perform(post("/login").params(loginParams))
+	.andExpect(status().is3xxRedirection())
+	.andExpect(MockMvcResultMatchers.redirectedUrl("/deltagerlisteView"));
+	}
 }
