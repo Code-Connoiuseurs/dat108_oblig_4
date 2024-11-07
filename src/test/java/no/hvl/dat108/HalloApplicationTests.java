@@ -1,17 +1,17 @@
 package no.hvl.dat108;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.util.LinkedMultiValueMap;
-
-import static org.assertj.core.api.InstanceOfAssertFactories.MATCHER;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,6 +19,7 @@ class AppMainTests {
 
 	private @Autowired PaameldingController controller;
 	private @Autowired MockMvc mockMvc;
+	private @Autowired PassordService passordService;
 
 	private LinkedMultiValueMap<String, String> testRequestParams;
 
@@ -172,4 +173,48 @@ class AppMainTests {
 				.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}
 
+	@Test
+	void testPassordHashing() {
+		String passord = "Swampebob292";
+		String salt = passordService.genererTilfeldigSalt();
+		String hashetPassord = passordService.hashMedSalt(passord, salt);
+
+		assertThat(hashetPassord).isNotEqualTo(passord);
+		assertThat(salt).isNotNull();
+	}
+
+	@Test
+	void testPassordValideringSaltOgHash() {
+		String passord = "BlekeErMeg9009";
+		String salt = passordService.genererTilfeldigSalt();
+		String hashetPassord = passordService.hashMedSalt(passord, salt);
+
+		assertThat(passordService.erKorrektPassord(passord, salt, hashetPassord)).isTrue();
+		assertThat(passordService.erKorrektPassord("feil passord", salt, hashetPassord)).isFalse();
+	}
+
+	@Test
+	void testFeilPassord() throws Exception {
+		testRequestParams.set("mobil", "12345678");
+		testRequestParams.set("passord", "TrumpErPresident");
+		mockMvc.perform(post("/paamelding").params(testRequestParams))
+		.andExpect(status().is3xxRedirection());
+
+		LinkedMultiValueMap<String, String> loginParams = new LinkedMultiValueMap<>();
+		loginParams.add("mobil", "12345678");
+		loginParams.add("passord", "KamelaErPresident");
+
+		mockMvc.perform(post("/login").params(loginParams))
+		.andExpect(status().is4xxClientError());
+	}
+
+	@Test
+	void testFeilLoginUregistrertBruker() throws Exception {
+	LinkedMultiValueMap<String, String> loginParams = new LinkedMultiValueMap<>();
+	loginParams.add("Mobil", "89898989");
+	loginParams.add("passord", "hvaSomHelst");
+
+	mockMvc.perform(post("/login").params(loginParams))
+	.andExpect(status().is4xxClientError());
+	}
 }

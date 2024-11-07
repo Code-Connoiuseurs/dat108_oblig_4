@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeltagerRepo extends JpaRepository<Deltager, String> {
     // Autogenerert
+
+    Deltager finnMedMobil(String mobil);
 }

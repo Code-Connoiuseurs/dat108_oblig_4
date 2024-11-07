@@ -1,5 +1,7 @@
 package no.hvl.dat108;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class PaameldingForm {
 	// Regex: Streng av tall med lengde 8

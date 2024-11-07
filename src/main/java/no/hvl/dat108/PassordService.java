@@ -6,9 +6,10 @@ import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import jakarta.xml.bind.DatatypeConverter; //Ikke med lenger i JDK 9+ !!!
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service; //Ikke med lenger i JDK 9+ !!!
+
+import jakarta.xml.bind.DatatypeConverter;
 
 @Service
 public class PassordService {
@@ -75,7 +76,7 @@ public class PassordService {
 	 */
 	public boolean erKorrektPassord(String passord, String salt, String hash) {
 		
-		if (passord == null || salt == null || hash == null) { //Burde validert skikkelig!!
+		if (passord == null || salt == null || hash == null) { // Burde validert skikkelig!!
 			throw new IllegalArgumentException();
 		}
 		

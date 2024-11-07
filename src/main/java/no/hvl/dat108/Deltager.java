@@ -1,6 +1,9 @@
 package no.hvl.dat108;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "oblig_4")
@@ -12,4 +15,9 @@ public class Deltager {
     private String fornavn;
     private String etternavn;
     private String kjonn;
+
+
+    public Passord getPassord() {
+        return passord;
+    }
 }
