@@ -9,19 +9,19 @@ CREATE SCHEMA oblig_4;
 SET search_path TO oblig_4;
 --
 
-CREATE TABLE paameldingForm (
+CREATE TABLE deltager (
   mobil CHARACTER (8) PRIMARY KEY,
   hash CHARACTER (64) NOT NULL,
   salt CHARACTER (32) NOT NULL,
   fornavn CHARACTER VARYING (20),
   etternavn CHARACTER VARYING (20),
-  kjonn CHARACTER CHECK ( kjonn='mann' or kjonn='kvinne')
+  kjonn CHARACTER VARYING (6) CHECK ( kjonn='mann' or kjonn='kvinne')
 );
 
 --
 
 INSERT INTO
-    paameldingForm(mobil, hash, salt, fornavn, etternavn, kjonn)
+    deltager(mobil, hash, salt, fornavn, etternavn, kjonn)
 VALUES
     ('12345678', 'aaa', 'aaa', 'aaa', 'aaa', 'mann')
 ;
