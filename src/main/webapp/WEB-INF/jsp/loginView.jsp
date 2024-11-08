@@ -26,6 +26,10 @@
     <p style="color:red;">${loginError}</p>  
  </c:if>
  
+ <c:if test="${not empty redirectMessage}">
+    <p style="color:red;">${redirectMessage}</p>  
+ </c:if>
+ 
  <a href="/paamelding">Til påmelding</a>
 
 

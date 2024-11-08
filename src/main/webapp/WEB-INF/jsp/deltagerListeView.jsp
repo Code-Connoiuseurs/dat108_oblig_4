@@ -28,15 +28,13 @@
 			<c:if test="${d.mobil == deltager.mobil}">
                 <tr style="background-color: green">                
             </c:if>
-				<td>${d.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
+				<td>${d.kjonn ==  "mann" ? "&#9794;" : "&#9792;"}</td>
 				<td>${d.fornavn} ${d.etternavn}</td>
 				<td>${d.mobil}</td>
 			</tr>
 		</c:forEach>
 	</table>
 	
-	<a href="/paamelding">Tilbake til påmelding</a>
-    
     <form action="logout" method="post">
                 <p><input type="submit" value="Logg ut" /></p>
         </form>
