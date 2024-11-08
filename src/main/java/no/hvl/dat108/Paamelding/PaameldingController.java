@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 public class PaameldingController {
 
 	@Autowired
-	private PaameldingSvervice paameldingSvervice;
+	private PaameldingService paameldingSvervice;
 
 	@GetMapping("/")
 	public String getRoot() {

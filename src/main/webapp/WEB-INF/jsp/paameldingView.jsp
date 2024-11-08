@@ -93,5 +93,8 @@ Mellomrom ikke tillatt.'
 			<input type="submit" value="Registrer">
 		</fieldset>
 	</form>
+    
+    <a href="/login">Til innlogging</a>
+
   </body>
 </html>

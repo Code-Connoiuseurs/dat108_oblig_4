@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Service
-public class PaameldingSvervice {
+public class PaameldingService {
 
     @Autowired
     PassordService passordService;
