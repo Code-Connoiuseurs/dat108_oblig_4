@@ -30,7 +30,6 @@
 			<input
 			   type="text" id="fornavn" name="fornavn"
 			   minlength="2" maxlength="20" pattern="^[A-ZÆØÅ][a-zæøåA-ZÆØÅ \-]{1,19}$" required
-			   value="${deltager.fornavn}"
 			   oninvalid="this.setCustomValidity('Fornavn må være 2-20 bokstaver, ha stor forbokstav, og kan inneholde mellomrom og bindestrek')"
 			   oninput="this.setCustomValidity('')"
 			>
@@ -39,7 +38,6 @@
 			<input
 				type="text" id="etternavn" name="etternavn"
 				minlength="2" maxlength="20" pattern="^[a-zæøåA-ZÆØÅ \-]{2,20}$" required
-				value="${deltager.etternavn}"
 				oninvalid="this.setCustomValidity('Etternavn må være 2-20 bokstaver, ha stor forbokstav, og kan inneholde mellomrom og bindestrek')"
 				oninput="this.setCustomValidity('')"
 			>
@@ -48,7 +46,6 @@
 			<input
 				type="tel" id="mobile" name="mobil" inputmode="numeric"
 				minlength="8" maxlength="8" pattern="^[0-9]{8}$" required
-		        value="${deltager.mobil}"
 				oninvalid="this.setCustomValidity('Mobil må være eksakt 8 siffer')"
 				oninput="this.setCustomValidity('')"
 			>
@@ -57,8 +54,6 @@
 			<input
 				type="password" id="passord" name="passord"
 				minlength="8" pattern="^(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*[\W_])(?!.*\s).{8,}$" required
-		        value="${deltager.passord}"
-
 				oninvalid="this.setCustomValidity(
 'Passord må være minst 8 tegn langt og inneholde minst ett tall,\
 minst én liten bokstav, minst én stor bokstav og minst ett spesialtegn.\
@@ -82,16 +77,17 @@ Mellomrom ikke tillatt.'
 			
 			<label>Kjønn</label>
 			<label for="mann">
-				<input type="radio" name="kjonn" required value="mann" id="mann">				
-				Mann
+				<input type="radio" name="kjonn" required value="mann" id="mann">
+				&#9794; - Mann
 			</label>
 			<label for="kvinne">
-				<input type="radio" name="kjonn" required value="kvinne" id="kvinne">				
-				Kvinne
+				<input type="radio" name="kjonn" required value="kvinne" id="kvinne">
+				&#9792; - Kvinne
 			</label>
 			
 			<input type="submit" value="Registrer">
 		</fieldset>
+		<a href="/deltagerliste">Se deltagerliste</a>
 	</form>
   </body>
 </html>

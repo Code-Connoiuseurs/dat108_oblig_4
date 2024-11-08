@@ -1,4 +1,4 @@
-package no.hvl.dat108;
+package no.hvl.dat108.Deltager;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

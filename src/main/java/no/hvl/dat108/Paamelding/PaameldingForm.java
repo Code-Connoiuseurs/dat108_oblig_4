@@ -1,4 +1,4 @@
-package no.hvl.dat108;
+package no.hvl.dat108.Paamelding;
 import jakarta.validation.constraints.*;
 
 public class PaameldingForm {
@@ -10,7 +10,7 @@ public class PaameldingForm {
     @NotEmpty(message = "Passord kan ikke være tomt")
 	@Size(min = 8, message = "Passord må være minst 8 tegn")
 	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*[\\W_])(?!.*\\s).{8,}$",
-			message = "Passord må være minst 8 tegn langt og inneholde minst ett tall, " +
+			message = "Passord må inneholde minst ett tall, " +
 					  "minst én liten bokstav, minst én stor bokstav og minst ett spesialtegn. " +
 					  "Mellomrom ikke tillatt.")
     private String passord;
