@@ -16,7 +16,7 @@
   </head>
   <body>
 	<h1>Deltagerliste</h1>
-    <p>Du er logget inn som: ${deltager.fornavn} ${deltager.etternavn}</p>
+    <p>Du er logget inn som: ${deltager.mobil} / ${deltager.fornavn} ${deltager.etternavn}</p>
 	
 	<table>
 		<tr>

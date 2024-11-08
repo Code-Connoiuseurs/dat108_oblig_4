@@ -51,7 +51,8 @@ public class PaameldingController {
 			return "paameldingView";
 		}
 
-		// All validering er OK, vi registrerer deltageren og redirecter til kvittering
+		// All validering er OK, vi registrerer deltageren, logger inn og redirecter til
+		// kvittering
 		Deltager nyDeltager = paameldingService.registrerDeltager(paameldingForm);
 		redirectAttributes.addFlashAttribute("deltager", nyDeltager);
 		LoginService.loggInnBruker(request, nyDeltager);

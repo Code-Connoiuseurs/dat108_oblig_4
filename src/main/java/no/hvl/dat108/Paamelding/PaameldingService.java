@@ -52,6 +52,10 @@ public class PaameldingService {
     }
 
     public List<Deltager> hentRegistrerteDeltagere() {
-        return deltagerRepo.findAll(Sort.by(Sort.DEFAULT_DIRECTION, "fornavn").and(Sort.by(Sort.DEFAULT_DIRECTION, "etternavn")));
+        Sort sort = Sort.by(
+            Sort.Order.asc("fornavn"),
+            Sort.Order.asc("etternavn")
+        );
+        return deltagerRepo.findAll(sort);
     }
 }

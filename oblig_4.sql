@@ -23,7 +23,7 @@ CREATE TABLE deltager (
 INSERT INTO
     deltager(mobil, hash, salt, fornavn, etternavn, kjonn)
 VALUES
-    ('12345678', 'aaa', 'aaa', 'aaa', 'aaa', 'mann')
+    ('12345678', 'Aaa', 'Aaa', 'Arne', 'Bjarnesen', 'mann')
 ;
 
 SELECT * FROM deltager;
