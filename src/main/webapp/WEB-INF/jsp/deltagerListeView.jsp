@@ -16,6 +16,7 @@
   </head>
   <body>
 	<h1>Deltagerliste</h1>
+    <p>Du er logget inn som: ${deltager.fornavn} ${deltager.etternavn}</p>
 	
 	<table>
 		<tr>
@@ -23,11 +24,13 @@
 			<th>Navn</th>
 			<th>Mobil</th>
 		</tr>
-		<c:forEach var="deltager" items="${deltagere}">
-			<tr>
-				<td>${deltager.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
-				<td>${deltager.fornavn} ${deltager.etternavn}</td>
-				<td>${deltager.mobil}</td>
+		<c:forEach var="d" items="${deltagere}">
+			<c:if test="${d.mobil == deltager.mobil}">
+                <tr style="background-color: green">                
+            </c:if>
+				<td>${d.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
+				<td>${d.fornavn} ${d.etternavn}</td>
+				<td>${d.mobil}</td>
 			</tr>
 		</c:forEach>
 	</table>
