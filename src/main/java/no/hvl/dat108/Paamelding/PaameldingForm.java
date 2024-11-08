@@ -1,4 +1,4 @@
-package no.hvl.dat108;
+package no.hvl.dat108.Paamelding;
 import jakarta.validation.constraints.*;
 
 public class PaameldingForm {

@@ -25,3 +25,5 @@ INSERT INTO
 VALUES
     ('12345678', 'aaa', 'aaa', 'aaa', 'aaa', 'mann')
 ;
+
+SELECT * FROM deltager;

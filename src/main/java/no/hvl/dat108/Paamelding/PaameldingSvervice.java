@@ -1,5 +1,9 @@
-package no.hvl.dat108;
+package no.hvl.dat108.Paamelding;
 
+import no.hvl.dat108.Deltager.Deltager;
+import no.hvl.dat108.Deltager.DeltagerRepo;
+import no.hvl.dat108.Deltager.Passord;
+import no.hvl.dat108.Login.PassordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
