@@ -35,17 +35,17 @@ public class PaameldingController {
 	@PostMapping("/paamelding")
 	public String postPaamelding(
 			Model model,
-			@Valid @ModelAttribute("deltager") PaameldingForm paameldingForm, BindingResult bindRes,
+			@Valid PaameldingForm paameldingForm, BindingResult bindingResult,
 			@RequestParam String passord_re,
 			RedirectAttributes redirectAttributes,
 			HttpServletResponse response
 	) {
 		// Vi gjennomfører programmatisk validering
-		paameldingSvervice.validerUnikMobil(bindRes, paameldingForm.getMobil());
-		paameldingSvervice.validerLiktPassord(bindRes, paameldingForm.getPassord(), passord_re);
-		if (bindRes.hasErrors()) {
+		paameldingSvervice.validerUnikMobil(bindingResult, paameldingForm.getMobil());
+		paameldingSvervice.validerLiktPassord(bindingResult, paameldingForm.getPassord(), passord_re);
+		if (bindingResult.hasErrors()) {
 			// Det har oppstått en valideringsfeil, vi rendrer siden på nytt og viser alle feilmeldinger
-			List<String> errors = bindRes.getAllErrors().stream()
+			List<String> errors = bindingResult.getAllErrors().stream()
 					.map(e -> e.getDefaultMessage())
 					.toList();
 			model.addAttribute("errors", errors);
@@ -66,6 +66,9 @@ public class PaameldingController {
 	
 	@GetMapping("/deltagerliste")
 	public String getDeltagerListe(Model model) {
+
+		if
+
 		List<Deltager> regDeltagere = paameldingSvervice.hentRegistrerteDeltagere();
 		model.addAttribute("deltagere", regDeltagere);
 		return "deltagerListeView";
