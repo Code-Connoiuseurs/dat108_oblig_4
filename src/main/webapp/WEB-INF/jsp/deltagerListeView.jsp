@@ -16,7 +16,7 @@
   </head>
   <body>
 	<h1>Deltagerliste</h1>
-	
+	<p>Du er innlogget som: ${innloggetDeltager.mobil} / ${innloggetDeltager.fornavn} ${innloggetDeltager.etternavn}</p>
 	<table>
 		<tr>
 			<th>Kjønn</th>
@@ -24,8 +24,8 @@
 			<th>Mobil</th>
 		</tr>
 		<c:forEach var="deltager" items="${deltagere}">
-			<tr>
-				<td>${deltager.kjonn ==  "mann" ? "&#9794;" : "&#9794;"}</td>
+			<tr ${deltager.mobil.equals(innloggetDeltager.mobil) ? 'style="background-color: green;"' : ''}>
+				<td>${deltager.kjonn.equals("mann") ? "&#9794;" : "&#9792;"}</td>
 				<td>${deltager.fornavn} ${deltager.etternavn}</td>
 				<td>${deltager.mobil}</td>
 			</tr>

@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <h2>Login</h2>
+    <h2>Logg inn</h2>
 
     <c:if test="${errors.size() > 0}">
         <p style="color:red;">Feil:</p>
@@ -26,11 +26,23 @@
     </c:if>
 
     <form action="/login" method="post">
-        <label for="mobil">Mobilnummer:</label>
-        <input type="text" id="mobil" name="mobil" required> <br>
-        <label for="passord">Passord</label>
-        <input type="password" id="passord" name="passord" required> <br>
-        <button type="submit">Login</button>
+        <fieldset>
+            <label for="mobil">Mobilnummer:</label>
+            <input
+                    type="tel" id="mobil" name="mobil" inputmode="numeric"
+                    minlength="8" maxlength="8" pattern="^[0-9]{8}$" required
+                    oninvalid="this.setCustomValidity('Mobil må være eksakt 8 siffer')"
+                    oninput="this.setCustomValidity('')"
+            >
+            <label for="passord">Passord</label>
+            <input
+                    type="password" id="passord" name="passord"
+                    minlength="8" pattern="^(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ])(?=.*[\W_])(?!.*\s).{8,}$" required
+                    oninvalid="this.setCustomValidity('Passord må være minst 8 tegn langt og inneholde minst ett tall, minst én liten bokstav, minst én stor bokstav og minst ett spesialtegn. Mellomrom ikke tillatt.')"
+                    oninput="this.setCustomValidity('')"
+            ><br>
+            <button type="submit">Login</button>
+        </fieldset>
     </form>
 
 </body>

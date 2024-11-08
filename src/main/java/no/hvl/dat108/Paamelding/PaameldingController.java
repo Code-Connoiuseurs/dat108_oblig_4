@@ -2,6 +2,7 @@ package no.hvl.dat108.Paamelding;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import no.hvl.dat108.Deltager.Deltager;
@@ -42,7 +43,8 @@ public class PaameldingController {
 			@Valid PaameldingForm paameldingForm, BindingResult bindingResult,
 			@RequestParam String passord_re,
 			RedirectAttributes redirectAttributes,
-			HttpServletResponse response
+			HttpServletResponse response,
+			HttpServletRequest request
 	) {
 		// Vi gjennomfører programmatisk validering
 		paameldingSvervice.validerUnikMobil(bindingResult, paameldingForm.getMobil());
@@ -59,6 +61,9 @@ public class PaameldingController {
 
 		// All validering er OK, vi registrerer deltageren og redirecter til kvittering
 		Deltager nyDeltager = paameldingSvervice.registrerDeltager(paameldingForm);
+
+		loginService.loggInnDeltager(request, nyDeltager);
+
 		redirectAttributes.addFlashAttribute("deltager", nyDeltager);
 		return "redirect:/paameldt";
 	}
