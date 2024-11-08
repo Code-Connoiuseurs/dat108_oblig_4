@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -52,10 +53,8 @@ public class PaameldingService {
     }
 
     public List<Deltager> hentRegistrerteDeltagere() {
-        Sort sort = Sort.by(
-            Sort.Order.asc("fornavn"),
-            Sort.Order.asc("etternavn")
-        );
-        return deltagerRepo.findAll(sort);
+        List<Deltager> deltagere = deltagerRepo.findAll();
+        deltagere.sort(Comparator.comparing(Deltager::getFornavn).thenComparing(Deltager::getEtternavn));
+        return deltagere;
     }
 }
