@@ -3,7 +3,9 @@ package no.hvl.dat108.Paamelding;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import no.hvl.dat108.Deltager.Deltager;
+import no.hvl.dat108.Login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class PaameldingController {
 
 	@Autowired
 	private PaameldingSvervice paameldingSvervice;
+    @Autowired
+    private LoginService loginService;
 
 	@GetMapping("/")
 	public String getRoot() {
@@ -65,9 +69,11 @@ public class PaameldingController {
 	}
 	
 	@GetMapping("/deltagerliste")
-	public String getDeltagerListe(Model model) {
-
-		if
+	public String getDeltagerListe(Model model, HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) {
+		if (!loginService.erBrukerInnlogget(session)) {
+			redirectAttributes.addFlashAttribute("errors", List.of("Du må logge inn for å se deltagerliste"));
+			return "redirect:/login";
+		}
 
 		List<Deltager> regDeltagere = paameldingSvervice.hentRegistrerteDeltagere();
 		model.addAttribute("deltagere", regDeltagere);

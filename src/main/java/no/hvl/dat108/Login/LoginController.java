@@ -84,7 +84,7 @@ public class LoginController {
         loginService.loggUtBruker(session);
 
         ra.addFlashAttribute("redirectMessage", "Du er nå logget ut");
-        return "redirect:login";
+        return "redirect:/login";
     }
 
 }

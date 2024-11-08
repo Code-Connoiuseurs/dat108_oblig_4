@@ -25,7 +25,7 @@
         </ul>
     </c:if>
 
-    <form action="/login" method="POST">
+    <form action="/login" method="post">
         <label for="mobil">Mobilnummer:</label>
         <input type="text" id="mobil" name="mobil" required> <br>
         <label for="passord">Passord</label>

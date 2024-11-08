@@ -33,6 +33,10 @@
 	</table>
 	
 	<a href="/paamelding">Tilbake til påmelding</a>
-	
+
+	<form action="/logout" method="post">
+		<input type="submit" value="Logg ut">
+	</form>
+
   </body>
 </html>
