@@ -2,8 +2,6 @@ package no.hvl.dat108.Paamelding;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletResponse;
-import no.hvl.dat108.Deltager.Deltager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import no.hvl.dat108.Deltager.Deltager;
+import no.hvl.dat108.Login.LoginService;
 
 @Controller
 public class PaameldingController {
@@ -26,28 +28,23 @@ public class PaameldingController {
 	public String getRoot() {
 		return "redirect:/paamelding";
 	}
-	
+
 	@GetMapping("/paamelding")
 	public String getPaamelding() {
 		return "paameldingView";
 	}
-	
+
 	@PostMapping("/paamelding")
-	public String postPaamelding(
-			Model model,
-			@Valid @ModelAttribute("deltager") PaameldingForm paameldingForm, BindingResult bindRes,
-			@RequestParam String passord_re,
-			RedirectAttributes redirectAttributes,
-			HttpServletResponse response
-	) {
+	public String postPaamelding(Model model, @Valid @ModelAttribute("deltager") PaameldingForm paameldingForm,
+			BindingResult bindRes, @RequestParam String passord_re, RedirectAttributes redirectAttributes,
+			HttpServletResponse response) {
 		// Vi gjennomfører programmatisk validering
 		paameldingSvervice.validerUnikMobil(bindRes, paameldingForm.getMobil());
 		paameldingSvervice.validerLiktPassord(bindRes, paameldingForm.getPassord(), passord_re);
 		if (bindRes.hasErrors()) {
-			// Det har oppstått en valideringsfeil, vi rendrer siden på nytt og viser alle feilmeldinger
-			List<String> errors = bindRes.getAllErrors().stream()
-					.map(e -> e.getDefaultMessage())
-					.toList();
+			// Det har oppstått en valideringsfeil, vi rendrer siden på nytt og viser alle
+			// feilmeldinger
+			List<String> errors = bindRes.getAllErrors().stream().map(e -> e.getDefaultMessage()).toList();
 			model.addAttribute("errors", errors);
 			response.setStatus(400);
 			return "paameldingView";
@@ -58,14 +55,18 @@ public class PaameldingController {
 		redirectAttributes.addFlashAttribute("deltager", nyDeltager);
 		return "redirect:/paameldt";
 	}
-	
+
 	@GetMapping("/paameldt")
 	public String getPaameldt() {
 		return "paameldtView";
 	}
-	
+
 	@GetMapping("/deltagerliste")
-	public String getDeltagerListe(Model model) {
+	public String getDeltagerListe(HttpSession session, Model model, RedirectAttributes ra) {
+		if (!LoginService.erBrukerInnlogget(session)) {
+			ra.addFlashAttribute("redirectMessage", "Du må være innlogget ...");
+			return "redirect:login";
+		}
 		List<Deltager> regDeltagere = paameldingSvervice.hentRegistrerteDeltagere();
 		model.addAttribute("deltagere", regDeltagere);
 		return "deltagerListeView";
